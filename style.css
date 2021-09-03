@@ -1,0 +1,191 @@
+@font-face {
+    font-family: "fanwood";
+    font-style: normal;
+    font-weight: normal;
+    src: url("fonts/Fanwood.otf");
+    font-display: swap;
+}
+
+:root {
+    --color-primary: #e9e2d7;
+    --color-primary-alt: #8e6549;
+    --color-secondary: #d42257;
+    --color-background: #d2fbf7;
+    --color-text: #412d86;
+    --color-light: #fff;
+    --color-anchor: #3a00ff;
+    --font-family: "fanwoood";
+    --font-weight-strong: 500;
+    --font-size-h1: 4rem;
+    --font-size-h2: 3rem;
+    --font-size-h3: 2rem;
+    --font-size-h4: 1.35rem;
+    --font-size-text: 1.15rem;
+    --border-radius: 8px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+/* Remove default margin */
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+
+/* Set core body defaults */
+
+body {
+    font-family: 'fanwood';
+    min-height: 100vh;
+    font-size: 100%;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+    overflow-x: hidden;
+}
+
+
+/* Make images easier to work with */
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* Inherit fonts for inputs and buttons */
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+body {
+    background-color: var(--color-primary);
+}
+
+button {
+    background-color: var(--color-primary);
+    border: none;
+    margin: 0;
+}
+
+input {
+    width: 100%;
+    margin-bottom: 10px 0;
+}
+
+.site-wrapper {
+    margin: 0 4%;
+}
+
+.card-info-wrapper {
+    margin: 4% 4%;
+    text-align: left;
+}
+
+
+/* .card-menu {
+    align-self: flex-end;
+    margin: 4% 4%;
+} */
+
+.read-status {
+    background-color: var(--color-primary);
+    color: var(--color-primary-alt);
+    text-align: center;
+    width: inherit;
+}
+
+.card-menu {
+    align-self: flex-end;
+    padding: 4% 4%;
+    width: inherit;
+    margin: unset;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header {
+    color: var(--color-primary);
+    background-color: var(--color-primary-alt);
+    height: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tool-bar {
+    margin-top: 20px;
+}
+
+.tools {
+    display: flex;
+}
+
+.button {
+    cursor: pointer;
+    display: inline-flex;
+    padding: 2px 8px;
+    color: var(--color-primary-alt);
+    background-color: var(--color-primary);
+}
+
+.button.add {
+    display: inline-flex;
+    padding: 2px 8px;
+    background-color: var(--color-primary-alt);
+    color: var(--color-primary);
+}
+
+.books-wrapper {
+    margin-top: 20px;
+    /* border: 1px solid white; */
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.book-card {
+    word-wrap: normal;
+    background-color: var(--color-primary-alt);
+    color: var(--color-primary);
+    width: 300px;
+    height: 350px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form-card {
+    display: none;
+    word-wrap: normal;
+    background-color: var(--color-primary-alt);
+    color: var(--color-primary);
+    width: 300px;
+    height: 350px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.toggle-on {
+    display: block;
+}

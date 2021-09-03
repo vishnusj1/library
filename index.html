@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="site-wrapper">
+            <div class="header-logo-container">
+                <h1>Library</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-bar">
+        <div class="site-wrapper">
+            <div class="tools">
+                <div class="button add" id="add-form">
+                    Add Book
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="books">
+        <div class="site-wrapper">
+            <div class="books-wrapper">
+                <!-- TEMPLATE FOR BOOK CARD -->
+                <!-- <div class="book-card">
+                    <div class="card-info-wrapper">
+                        <h2>Title</h2>
+                        <h3>Author</h3>
+                        <h4>Pages</h4>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum fugit officiis animi soluta et, sit aliquid.</p>
+                    </div>
+                    <div class="card-menu">
+                        <input type="radio">
+                        <div class="button read" id="remove-btn-${book.id}">
+                            Read
+                        </div>
+                        <div class="button">
+                            Remove
+                        </div>
+                    </div>
+                </div> -->
+                <div class="form-card">
+                    <div class="card-info-wrapper">
+                        <form id="input-form">
+                            <label for="title"><h3>Title</h3></label>
+                            <input type="text" id="title" name="title" placeholder="Name of the Book" required>
+
+                            <label for="author"><h3>Author</h3></label>
+                            <input type="text" id="author" name="author" placeholder="Name of the Author" required>
+
+                            <label for="pages"><h3>Pages</h3></label>
+                            <input type="number" id="pages" name="pages" placeholder="Number of Pages" required>
+
+                            <button type="submit" class="button" id="addBook">Add Book</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
