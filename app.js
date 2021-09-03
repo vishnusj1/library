@@ -19,17 +19,26 @@ function Book(title, author, pages) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.info = function() {
-        return `${this.title} is a book by ${this.author}, ${this.pages} pages`
-    };
+    this.read = false;
+    // this.info = function() {
+    //     return `${this.title} is a book by ${this.author}, ${this.pages} pages`
+    // };
 };
 
-Book.prototype.read = false;
-// console.log(Book.prototype.read);
+function info(book) {
+    return `${book.title} is a book by ${book.author}, ${book.pages} pages`
+}
+
+// Book.prototype.read = false;
 // Book.prototype.info = function() {
-//     return `${this.title} is a book by ${this.author}, ${this.pages} pages, not read yet.`
-// };
-// newBook.prototype = Object.create(Book.prototype)
+//     return `${this.title} is a book by ${this.author}, ${this.pages} pages`
+// }
+
+// function setItem() {
+//     localStorage.setItem('myLibrary', JSON.stringify(myLibrary, function replacer(key, value) {
+//         return (key == 'info') ? undefined : value;
+//     }));
+// }
 function setItem() {
     localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 }
@@ -62,11 +71,16 @@ function populateBooks(myLib, bookView) {
                                     <h2>${book.title}</h2>
                                     <h3>${book.author}</h3>
                                     <h4>${book.pages} Pages</h4>
-                                <p id="status-book${book.id}" class ="read-status"></p>
+                                    <p>${info(book)}</p>
+                                <p id="status-book${book.id}" class ="read-status">${
+                                    book.read ? 'Completed' : 'Not read'}
+                                    </p>
                                 </div>
                                 <div class="card-menu">
                                 <div class="button read" id="read-btn-${book.id}">
-                                        Mark as Read
+                                    ${
+                                        book.read ?  'Mark as Unread' : 'Mark as Read'
+                                    }
                                 </div>
                                     <div class="button remove" id="remove-btn-${book.id}">
                                         Remove
@@ -82,14 +96,16 @@ function populateBooks(myLib, bookView) {
         removeButton.addEventListener('click', (e) => {
             removeBook(book.id)
         })
+
         const readButton = document.querySelector(`#read-btn-${book.id}`);
         const status = document.querySelector(`#status-book${book.id}`)
+
         readButton.addEventListener("click", (e) => {
-            readStatus(book);
-            // console.log(book.prototype.read);
-            book.prototype.read ? readButton.textContent = 'Mark as Unread' : readButton.textContent = 'Mark as Read'
-            status.textContent = book.prototype.read ? 'Read' : 'Not read';
+            readStatus(book, status, readButton);
+            book.read ? readButton.textContent = 'Mark as Unread' : readButton.textContent = 'Mark as Read'
+            status.textContent = book.read ? 'Completed' : 'Not read';
         });
+
     });
 
 };
@@ -108,26 +124,20 @@ function formDisplay() {
 
 function removeBook(id) {
     myLibrary.splice(id, 1);
-    populateBooks(myLibrary, bookList);
     setItem();
+    populateBooks(myLibrary, bookList);
 }
 
-function readStatus(book) {
-    book.prototype.read = !book.prototype.read;
-}
-
-function addDummies() {
-    new Book('The Hobbit', 'J.R.R. Tolkien', 295);
-    new Book('Harry Potter', 'J.K Rowling', 320);
-    new Book('The Subtle Art of Not Giving a Fuck', 'Mark Manson', 300)
+function readStatus(book, status, readButton) {
+    book.read = !book.read;
+    setItem();
+    // populateBooks(myLibrary, bookList);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     form.addEventListener("submit", function(e) {
         addToLibrary(e)
     });
+    formButton.addEventListener('click', formDisplay);
+    populateBooks(myLibrary, bookList);
 });
-
-// addDummies();
-populateBooks(myLibrary, bookList);
-formButton.addEventListener('click', formDisplay);
