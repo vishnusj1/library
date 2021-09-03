@@ -3,8 +3,17 @@ const formButton = document.getElementById('add-form');
 const formView = document.querySelector('.form-card')
 const bookList = document.querySelector('.books-wrapper');
 
-let myLibrary = [];
+let myLibrary = JSON.parse(localStorage.getItem('myLibrary')) || [];
 let newBook;
+
+if (localStorage.getItem('myLibrary') === null) {
+    myLibrary = [
+        new Book('The Hobbit', 'J.R.R. Tolkien', 295),
+        new Book('Harry Potter', 'J.K Rowling', 320),
+        new Book('The Subtle Art of Not Giving a Fuck', 'Mark Manson', 300)
+    ];
+    setItem();
+}
 
 function Book(title, author, pages) {
     this.title = title;
@@ -21,6 +30,9 @@ Book.prototype.read = false;
 //     return `${this.title} is a book by ${this.author}, ${this.pages} pages, not read yet.`
 // };
 // newBook.prototype = Object.create(Book.prototype)
+function setItem() {
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+}
 
 function addToLibrary(e) {
     {
@@ -32,6 +44,7 @@ function addToLibrary(e) {
     } {
         myLibrary.push(newBook);
         populateBooks(myLibrary, bookList);
+        setItem();
         formDisplay();
         form.reset();
         console.table(myLibrary)
@@ -49,7 +62,6 @@ function populateBooks(myLib, bookView) {
                                     <h2>${book.title}</h2>
                                     <h3>${book.author}</h3>
                                     <h4>${book.pages} Pages</h4>
-                                    <p>${book.info()}</p>
                                 <p id="status-book${book.id}" class ="read-status"></p>
                                 </div>
                                 <div class="card-menu">
@@ -74,15 +86,13 @@ function populateBooks(myLib, bookView) {
         const status = document.querySelector(`#status-book${book.id}`)
         readButton.addEventListener("click", (e) => {
             readStatus(book);
-            console.log(book.prototype.read);
+            // console.log(book.prototype.read);
             book.prototype.read ? readButton.textContent = 'Mark as Unread' : readButton.textContent = 'Mark as Read'
-                // readButton.textContent = 'Mark as Unread';
             status.textContent = book.prototype.read ? 'Read' : 'Not read';
         });
     });
 
 };
-
 
 // bookList.addEventListener("click", (e) => {
 //     if (e.target.classList.contains("remove")) {
@@ -97,25 +107,20 @@ function formDisplay() {
 };
 
 function removeBook(id) {
-    // console.log('deleting', id);
     myLibrary.splice(id, 1);
     populateBooks(myLibrary, bookList);
-    // console.table(myLibrary);
+    setItem();
 }
 
 function readStatus(book) {
     book.prototype.read = !book.prototype.read;
-    // console.log(book);
 }
 
-
-
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295);
-myLibrary.push(theHobbit)
-const harryPotter = new Book('Harry Potter', 'J.K Rowling', 320);
-myLibrary.push(harryPotter)
-const sangaf = new Book('The Subtle Art of Not Giving a Fuck', 'Mark Manson', 300)
-myLibrary.push(sangaf)
+function addDummies() {
+    new Book('The Hobbit', 'J.R.R. Tolkien', 295);
+    new Book('Harry Potter', 'J.K Rowling', 320);
+    new Book('The Subtle Art of Not Giving a Fuck', 'Mark Manson', 300)
+}
 
 document.addEventListener("DOMContentLoaded", function() {
     form.addEventListener("submit", function(e) {
@@ -123,7 +128,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-formButton.addEventListener('click', formDisplay);
-
-
+// addDummies();
 populateBooks(myLibrary, bookList);
+formButton.addEventListener('click', formDisplay);
