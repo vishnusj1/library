@@ -93,9 +93,10 @@ function populateBooks(myLib, bookView) {
         bookView.appendChild(element.firstChild);
 
         const removeButton = document.querySelector(`#remove-btn-${book.id}`);
-        removeButton.addEventListener('click', (e) => {
-            removeBook(book.id)
-        })
+        // removeButton.addEventListener('click', (e) => {
+        //     removeBook(book.id)
+        // })
+        removeButton.addEventListener('click', removeBook.bind(book.id), false);
 
         const readButton = document.querySelector(`#read-btn-${book.id}`);
         const status = document.querySelector(`#status-book${book.id}`)
@@ -123,6 +124,7 @@ function formDisplay() {
 };
 
 function removeBook(id) {
+    console.log(this);
     myLibrary.splice(id, 1);
     setItem();
     populateBooks(myLibrary, bookList);
