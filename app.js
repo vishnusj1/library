@@ -5,13 +5,6 @@ const Book = class {
         this.pages = pages;
         this.read = false;
     }
-
-    info() {
-        return `
-        ${this.title} is a book by ${this.author},
-        ${this.pages}Pages.
-        `;
-    }
 };
 
 const Library = (function () {
@@ -62,9 +55,10 @@ const displayController = (function () {
                     <h2>${book.title}</h2>
                     <h3>${book.author}</h3>
                     <h4>${book.pages} Pages</h4>
-                    <p id="status-book${book.id}" class ="read-status">${book.read ? "Completed" : "Not read"
-                }</p>
+                    <p>${getInfo(book)}</p>
                 </div>
+                <p id="status-book${book.id}" class ="read-status">${book.read ? "Completed" : "Not read"
+                }</p>
                 <div class="card-menu">
                     <div class="button read" id="read-btn-${book.id}">
                         ${book.read ? "Mark as Unread" : "Mark as Read"}
@@ -112,16 +106,26 @@ const displayController = (function () {
         LocalStorage.set()
     }
 
+    function getInfo(book) {
+        return `
+            ${book.title} is a book by ${book.author},
+            ${book.pages}Pages.
+            `;
+    }
+
     function toggleForm() {
         form.reset();
         formView.classList.toggle("toggle-on");
     }
+
+
 
     return {
         toggleForm,
         render,
         clear,
         remove,
+        getInfo,
     };
 })();
 
